@@ -28,3 +28,14 @@ property, in an efficient enough way to treat the GL_3(O_Q(√−m))-cases. Its 
 [TorsionSubcomplexesSubpackage.tar.gz](https://github.com/arahm/Farrell-Tate_cohomology_computations/files/8797219/TorsionSubcomplexesSubpackage.tar.gz)
 
 This allows us to extract the p-torsion subcomplexes.
+The authors applied the rigid facets subdivision algorithm to
+• the PGL 3 (Z[i]) cell complex of Mathieu Dutour Sikiric and
+• the GL 3 (O −m ) cell complexes for m ∈ {1, 2, 7, 11, 15, 19, 5} of Sebastian Schönnenbeck.
+Some of the subdivided cell complexes (to be read back into HAP) are in this archive file:
+
+[cellcomplexes.tar.gz](https://github.com/arahm/Farrell-Tate_cohomology_computations/files/8797994/cellcomplexes.tar.gz)
+
+Then they extracted the 3-torsion subcomplex, and finally reduced it using their pertinent methods (Alexander D. Rahm, "Accessing the cohomology of discrete groups above their virtual cohomological dimension, J. Algebra 404 (2014), 152–175. MR3177890"),
+which are also implemented in the above quoted torsion subcomplexes subpackage, to be used within HAP:
+
+https://gap-packages.github.io/hap/
