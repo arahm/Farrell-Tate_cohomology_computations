@@ -39,3 +39,9 @@ Then they extracted the 3-torsion subcomplex, and finally reduced it using their
 which are also implemented in the above quoted torsion subcomplexes subpackage, to be used within HAP:
 
 https://gap-packages.github.io/hap/
+
+# Sage scripts for the unit index question
+
+Our Sage scripts for the unit index question are in the file
+
+https://github.com/arahm/Farrell-Tate_cohomology_computations/blob/main/Sage_scripts_for_the_unit_index_question.pdf
