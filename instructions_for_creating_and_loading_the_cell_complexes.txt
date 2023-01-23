@@ -1,0 +1,113 @@
+ ##########################################################################
+ # Instructions for constructing the cell complexes in MAGMA                                                                                                  #
+ ##########################################################################
+
+ # Download Sebastian Schoennenbeck's software from
+
+ https://github.com/schoennenbeck/VMH-ImaginaryQuadraticNumberFields
+
+ # as a zip folder and unpack it on a machine which has MAGMA installed and operational.
+
+ # Choose the dimension (for our test run take n=2, while in the paper n=3 is treated) and the negative integer  (let's say d=-10) whose square-root defines the ring of integers. We will need to edit the file BasicData.m to make this known to Magma. There are three values that need to be set in this file. For our purposes we will ignore the Steinitz argument; setting it to 1 simply means we want to work with the full general linear group. Check that the file BasicData.m reads:
+
+  n:=2; d:=-10; steinitz:=1;
+
+ # Open Magma and initialize the basic setup by calling:
+
+  AttachSpec("path/to/files/VMH-spec");
+  V := VoronoiAlgorithm()
+
+ # Run the cell complex construction, specifying the file into which to save it:
+
+  ComputeComplexGL("../GL2o-10.HAP", V);
+
+  quit;
+
+
+ ############################################
+ # Instructions for subdividing the cell complexes in HAP                   #
+ ############################################
+
+# 1.) Get the file ReadWellRoundedComplex.gi from
+
+https://raw.githubusercontent.com/schoennenbeck/VMH-ImaginaryQuadraticNumberFields/master/GAP/ReadWellRoundedComplex.gi
+
+# and install it in a path that you can remember (called "path/to/gapstuff" below).
+
+# 2.) Start a GAP session (with the package HAP installed), and type the commands
+
+ LoadPackage("HAP");
+ Read("path/to/gapstuff/ReadWellRoundedComplex.gi");
+
+# Ignore the long list of warnings produced in the GAP terminal.
+
+# 3.) To get the contractible G-complex (non-free ZG-resolution) up to dimension 'length' (can be arbitrarily high without actually hurting performance) call:
+
+ C := ResolutionFromWellRoundedComplex("path/to/cell_complex/GL2o-10.HAP", length);
+
+# assuming you have put the gzipped file GL2o-10.HAP.gz into path/to/cell_complex.
+
+# 3.) Applying commands from the Torsion Subcomplexes Subpackage,
+
+#   https://gaati.org/rahm/subpackage-documentation/
+
+ R := RigidFacetsSubdivision(C);
+
+ VisualizeTorsionSkeleton(R,2);
+
+# displays a graph with the 1-dimensional skeleton of the 2-torsion-subcomplex, allowing to count the number of connected components of the latter. In our example, the graph is connected, so there the 2-torsion-subcomplex consists of 1 connected component.
+
+ ############################################
+# Loading the GL3 cell complexes from the tarball                               #
+############################################
+
+ # 1 .) Find out where you have installed GAP, and install the package HAP into it:
+
+ https://gap-packages.github.io/hap/www/index.html
+
+ # For instance, if you have installed GAP in the folder /usr/share, then go to this folder and run the command
+
+ find -name 'gap'
+
+ # otherwise run it from your home folder or in the worst case from the root folder. Then you should know what is the path to the relevant installation of GAP, let us call this path GAP-DIRECTORY in the following.
+
+ # The contractible complexes are all given in HAP-readable format. Now copy the cell complexes downloaded from
+
+ https://github.com/arahm/Farrell-Tate_cohomology_computations/files/8797126/GL3ImaginaryIntegers.tar.gz
+
+ # and unpacked into the directory
+
+ GAP-DIRECTORY/pkg/hap-1.28/lib/Perturbations/Gcomplexes
+
+ # Here, the version number of HAP might change, so you may search for this folder with the command
+
+ find -name 'Gcomplexes'
+
+ # In recent versions of HAP (e.g. 1.28), you have to compress the cell complex into gzip format (*.gz). If your GAP installation is in the usr/share folder, this may require superuser privileges:
+
+ sudo gzip GL3O-2HAP
+
+# where here and in what follows, you replace "GL3O-2HAP" by the name of the selected cell complex. 
+# The files labeled "GL3O-dHAP" contain contractible complexes for the general linear groups of degree 3 over the integers of the imaginary quadratic number field Q(sqrt(-d)).
+
+ # 2.) After starting GAP and loading HAP with the command
+
+ LoadPackage("HAP");
+
+ you may then use the command
+
+ C := ContractibleGcomplex("GL3O-2HAP);
+
+ to construct the desired non-free resolution in GAP/HAP.
+
+Then, if you have several months of processor time to spare, you can continue with 
+
+ R := RigidFacetsSubdivision(C);
+
+ VisualizeTorsionSkeleton(R,2);
+
+Note that the rigid facets subdivision is a resource-intensive process, described in "The Farrell-Tate and Bredon homology for PSL_4(Z) via cell subdivisions",
+by Tuan Anh Bui, Alexander D. Rahm and Matthias Wendt, Journal of Pure and Applied Algebra, Volume 223, Issue 7, July 2019, Pages 2872-2888. DOI: 10.1016/j.jpaa.2018.10.002. Preprint version on HAL:
+https://hal.archives-ouvertes.fr/hal-01398162
+
+
