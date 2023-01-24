@@ -43,6 +43,8 @@ https://gap-packages.github.io/hap/
 
 # Sage scripts for the unit index question
 
-Our Sage scripts for the unit index question are in the file
+Our Sage scripts for the unit index question are in the code file here: [sageScriptGL3.txt](https://github.com/arahm/Farrell-Tate_cohomology_computations/files/10494148/sageScriptGL3.txt)
+
+with a PDF version here:
 
 https://github.com/arahm/Farrell-Tate_cohomology_computations/blob/main/Sage_scripts_for_the_unit_index_question.pdf
